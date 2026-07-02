@@ -5,6 +5,8 @@ services:
     container_name: aegis_arena_backend
     env_file:
       - .env
+    environment:
+      - PYTHONPATH=/app
     ports:
       - "8000:8000"
     depends_on:
@@ -14,6 +16,7 @@ services:
         condition: service_started
     volumes:
       - ./backend/app:/app/app
+      - ./backend/tests:/app/tests
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
   postgres:
